@@ -27,6 +27,20 @@ namespace SimpleHotelRoomManagementProjectWithOOP
 
 
 
+        // Guest's national ID with validation
+        public string NationalID
+        {
+            get => nationalID;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value) || value.Length < 5)
+                    throw new ArgumentException("National ID must be at least 5 characters.");
+                nationalID = value;
+            }
+        }
+
+
+
         // Override ToString to display guest information clearly
         public override string ToString()
         {
