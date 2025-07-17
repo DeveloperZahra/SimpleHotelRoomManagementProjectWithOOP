@@ -40,7 +40,7 @@ namespace SimpleHotelRoomManagementProjectWithOOP
                 return $"Room {RoomNumber} - Available - Rate: {DailyRate}";
 
             double totalCost = ReservationInfo.Nights * DailyRate;
-            return $"Room {RoomNumber} - Reserved by {ReservationInfo.GuestName} - Nights: {ReservationInfo.Nights} - Total: {totalCost}"; // Returns a string showing the room number and daily rate.
+            return $"Room {RoomNumber} - Reserved by {ReservationInfo.GuestInfo.Name} - Nights: {ReservationInfo.Nights} - Total: {totalCost}";
         }
 
     }
