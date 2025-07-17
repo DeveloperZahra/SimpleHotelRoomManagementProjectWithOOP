@@ -110,6 +110,21 @@ namespace SimpleHotelRoomManagementProjectWithOOP
         }
 
 
+        // Cancel reservation by room number
+        public void CancelReservation(int roomNumber)
+        {
+            var room = rooms.FirstOrDefault(r => r.RoomNumber == roomNumber);
+            if (room == null || !room.IsReserved)
+            {
+                Console.WriteLine("No reservation found for this room.");
+                return;
+            }
+
+            room.IsReserved = false;
+            room.ReservationInfo = null;
+            Console.WriteLine($"Reservation for room {roomNumber} canceled.");
+        }
+
 
 
     }
