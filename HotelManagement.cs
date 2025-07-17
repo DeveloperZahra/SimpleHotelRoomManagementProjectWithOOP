@@ -37,6 +37,15 @@ namespace SimpleHotelRoomManagementProjectWithOOP
             return guests.FirstOrDefault(g => g.NationalID == nationalID);
         }
 
+        // Add new room to the system
+        public void AddRoom(int roomNumber, double dailyRate)
+        {
+            if (rooms.Any(r => r.RoomNumber == roomNumber))
+                throw new Exception("Room number must be unique.");
+
+            rooms.Add(new Room(roomNumber, dailyRate));
+        }
+
 
     }
 }
