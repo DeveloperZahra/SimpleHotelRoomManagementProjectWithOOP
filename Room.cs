@@ -18,7 +18,7 @@ namespace SimpleHotelRoomManagementProjectWithOOP
 
 
         // Constructor with validation for rate
-        public Room(int roomNumber, double dailyRate)
+        public  Room(int roomNumber, double dailyRate)
         {
             if (dailyRate < 100)
                 throw new ArgumentException("Daily rate must be at least 100.");
