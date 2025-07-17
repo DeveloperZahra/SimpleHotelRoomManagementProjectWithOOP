@@ -35,7 +35,11 @@ namespace SimpleHotelRoomManagementProjectWithOOP
             Nights = nights;
         }
 
-
+        // Override ToString to display guest information clearly
+        public override string ToString()
+        {
+            return $"Guest Name: {Name} | National ID: {NationalID} | Room Number: {RoomNumber} | Nights: {Nights}";
+        }
 
 
     }
