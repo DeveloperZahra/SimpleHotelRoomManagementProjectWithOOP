@@ -22,5 +22,13 @@ namespace SimpleHotelRoomManagementProjectWithOOP
         }
 
 
+        
+        // Display all guests
+        public void ViewAllGuests()
+        {
+            foreach (var guest in guests)
+                Console.WriteLine(guest);
+        }
+
     }
 }
