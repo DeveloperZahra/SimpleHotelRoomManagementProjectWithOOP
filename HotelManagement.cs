@@ -46,6 +46,15 @@ namespace SimpleHotelRoomManagementProjectWithOOP
             rooms.Add(new Room(roomNumber, dailyRate));
         }
 
+        // View all rooms and their stuatus 
+
+        public void ViewAllRooms()
+        {
+            foreach (var room in rooms)
+                Console.WriteLine(room);
+        }
+
+
 
     }
 }
