@@ -52,11 +52,18 @@ namespace SimpleHotelRoomManagementProjectWithOOP
             }
         }
 
+        // Constructor
+        public Guest(string name, string phoneNumber, string nationalID)
+        {
+            Name = name;
+            PhoneNumber = phoneNumber;
+            NationalID = nationalID;
+        }
 
         // Override ToString to display guest information clearly
         public override string ToString()
         {
-            return $"Guest Name: {Name} | National ID: {NationalID} | Room Number: {RoomNumber} | Nights: {Nights}";
+            return $"Name: {Name}, Phone: {PhoneNumber}, National ID: {NationalID}";
         }
 
 
