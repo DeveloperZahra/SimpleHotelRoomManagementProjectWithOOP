@@ -13,27 +13,29 @@ namespace SimpleHotelRoomManagementProjectWithOOP
         public int RoomNumber { get; set; } // Property to store the room number.
         public double DailyRate  { get; set; } // Property to store the daily rate of the room.
 
+        public bool IsReserved { get; set; } // Room reservation status (true if reserved)
+
+
+
+        // Constructor with validation for rate
+        public Room(int roomNumber, double dailyRate)
+        {
+            if (dailyRate < 100)
+                throw new ArgumentException("Daily rate must be at least 100.");
+
+            RoomNumber = roomNumber;
+            DailyRate = dailyRate;
+            IsReserved = false;
+        }
+
         // Overrides the default ToString method to return a formatted string with room information.
         public override string ToString() //ToString()-> Returns a readable string about the room
         {
 
-            return $"Room RoomNumber: {RoomNumber}, DailyRate: {DailyRate}"; // Returns a string showing the room number and daily rate.
+            string status = IsReserved ? "Reserved" : "Available";
+            return $"Room {RoomNumber} | Rate: {DailyRate} | Status: {status}"; // Returns a string showing the room number and daily rate.
         }
-
-        // Static method to create a Room object from a string.
-        public static Room FromString(string line) //FromString()-> Converts a text line into a Room object
-
-        {
-            var parts = line.Split('|'); // Split the input string using the '|' character as a separator.
-            return new Room  // Create a new Room object and assign the values after parsing
-            {
-                RoomNumber = int.Parse(parts[0]), // Convert the first part to int for the room number.
-                DailyRate = double.Parse(parts[1]) // Convert the second part to double for the daily rate.
-                                                // It's better to use double.Parse instead of int.Parse here.
-            };
-
-        }
-     }
+    }
 
 
 
