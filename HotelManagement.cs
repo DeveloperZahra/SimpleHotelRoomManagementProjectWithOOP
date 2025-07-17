@@ -93,8 +93,21 @@ namespace SimpleHotelRoomManagementProjectWithOOP
                 Console.WriteLine("Reservation not found.");
         }
 
+        // Show guest who paid the most
 
+        public void ShowHighestPayingGuest()
+        {
+            var reservedRooms = rooms.Where(r => r.IsReserved);
+            if (!reservedRooms.Any())
+            {
+                Console.WriteLine("No reservations found.");
+                return;
+            }
 
+            var highest = reservedRooms.OrderByDescending(r => r.ReservationInfo.Nights * r.DailyRate).First();
+            double total = highest.ReservationInfo.Nights * highest.DailyRate;
+            Console.WriteLine($"Highest Paying Guest: {highest.ReservationInfo.GuestInfo.Name} - Total: {total}");
+        }
 
 
 
