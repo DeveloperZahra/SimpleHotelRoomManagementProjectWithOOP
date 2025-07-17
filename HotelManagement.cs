@@ -71,6 +71,15 @@ namespace SimpleHotelRoomManagementProjectWithOOP
             room.IsReserved = true;
         }
 
+        // View all current reservation 
+        public void ViewAllReservations()
+        {
+            foreach (var room in rooms.Where(r => r.IsReserved))
+            {
+                double total = room.ReservationInfo.Nights * room.DailyRate;
+                Console.WriteLine($"Guest: {room.ReservationInfo.GuestInfo.Name}, Phone: {room.ReservationInfo.GuestInfo.PhoneNumber}, Room: {room.RoomNumber}, Nights: {room.ReservationInfo.Nights}, Rate: {room.DailyRate}, Total: {total}");
+            }
+        }
 
     }
 }
