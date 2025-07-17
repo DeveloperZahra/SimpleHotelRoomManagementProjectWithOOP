@@ -40,6 +40,18 @@ namespace SimpleHotelRoomManagementProjectWithOOP
         }
 
 
+        // Guest's phone number with validation
+        public string PhoneNumber
+        {
+            get => phoneNumber;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value) || value.Length < 7)
+                    throw new ArgumentException("Phone number must be at least 7 digits.");
+                phoneNumber = value;
+            }
+        }
+
 
         // Override ToString to display guest information clearly
         public override string ToString()
