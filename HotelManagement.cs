@@ -30,5 +30,13 @@ namespace SimpleHotelRoomManagementProjectWithOOP
                 Console.WriteLine(guest);
         }
 
+
+        // Find guest by National ID
+        public Guest FindGuestByNationalID(string nationalID)
+        {
+            return guests.FirstOrDefault(g => g.NationalID == nationalID);
+        }
+
+
     }
 }
