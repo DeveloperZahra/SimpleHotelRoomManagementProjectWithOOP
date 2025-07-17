@@ -81,5 +81,23 @@ namespace SimpleHotelRoomManagementProjectWithOOP
             }
         }
 
+
+        // Search for reservation by guest name (case-insensitive)
+
+        public void SearchReservationByGuest(string guestName)
+        {
+            var result = rooms.FirstOrDefault(r => r.IsReserved && r.ReservationInfo.GuestInfo.Name.Equals(guestName, StringComparison.OrdinalIgnoreCase));
+            if (result != null)
+                Console.WriteLine(result);
+            else
+                Console.WriteLine("Reservation not found.");
+        }
+
+
+
+
+
+
+
     }
 }
