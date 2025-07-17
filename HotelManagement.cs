@@ -54,6 +54,22 @@ namespace SimpleHotelRoomManagementProjectWithOOP
                 Console.WriteLine(room);
         }
 
+        // Reserve a room for an existing guest
+        public void ReserveRoom(string nationalID, int roomNumber, int nights)
+        {
+            var guest = FindGuestByNationalID(nationalID);
+            if (guest == null)
+                throw new Exception("Guest not found. Please add the guest first.");
+
+            var room = rooms.FirstOrDefault(r => r.RoomNumber == roomNumber);
+            if (room == null)
+                throw new Exception("Room does not exist.");
+            if (room.IsReserved)
+                throw new Exception("Room is already reserved.");
+
+            room.ReservationInfo = new Reservation(guest, nights);
+            room.IsReserved = true;
+        }
 
 
     }
