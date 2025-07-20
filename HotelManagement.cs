@@ -26,8 +26,16 @@ namespace SimpleHotelRoomManagementProjectWithOOP
         // Display all guests
         public void ViewAllGuests()
         {
-            foreach (var guest in guests)
-                Console.WriteLine(guest);
+            if (guests.Count > 0)
+            {
+                foreach (var guest in guests)
+                    Console.WriteLine(guest);
+            }
+            else
+            {
+                Console.WriteLine("You have not added any guest.");
+            }
+
         }
 
 
