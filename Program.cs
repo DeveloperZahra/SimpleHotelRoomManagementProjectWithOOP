@@ -3,13 +3,18 @@
     internal class Program
     {
         static void Main(string[] args)
+
         {
-            // Create an instance of the HotelManagement class to manage the hotel operations
+           
 
-            HotelManagement hotel = new HotelManagement();
+                // Create an instance of the HotelManagement class to manage the hotel operations
 
-            while (true) // Start an infinite loop to keep showing the menu until the user chooses to exit
+                HotelManagement hotel = new HotelManagement();
+            bool GoList = true;
+
+            while (GoList) // Start an infinite loop to keep showing the menu until the user chooses to exit
             {
+                Console.Clear();
                 // Display the main menu options to the user
                 Console.WriteLine("\n__________Hotel Management System__________");
                 Console.WriteLine("1. Add Guest");
@@ -21,13 +26,15 @@
                 Console.WriteLine("7. Search Reservation by Guest Name");
                 Console.WriteLine("8. Show Highest Paying Guest");
                 Console.WriteLine("9. Cancel Reservation");
-                Console.WriteLine("10. Exit");
+                Console.WriteLine("0. Exit");
                 Console.Write("Choose an option: ");
+                Console.WriteLine("\nPress any key to return to the main menu...");
 
+                int choice = int.Parse(Console.ReadLine()); // Read the user choice from the console and convert it to an integer
                 try
                 {
-                    // Read the user choice from the console and convert it to an integer
-                    int choice = int.Parse(Console.ReadLine());
+                    
+
                     switch (choice) // Perform an action depending on the user's choice
                     {
                         case 1:
@@ -39,11 +46,15 @@
                             Console.Write("National ID: ");
                             string id = Console.ReadLine();
                             hotel.AddGuest(new Guest(name, phone, id));
+                            Console.WriteLine("Successfully add guest");
+                            Console.ReadLine();
                             break;
 
                         case 2:
                             // Display all guests in the hotel
                             hotel.ViewAllGuests();
+                            Console.WriteLine("All guests at the hotel have been successfully viewed.");
+                            Console.ReadLine();
                             break;
 
                         case 3:
@@ -53,11 +64,15 @@
                             Console.Write("Daily Rate: ");
                             double rate = double.Parse(Console.ReadLine());
                             hotel.AddRoom(roomNum, rate);
+                            Console.WriteLine("Room data has been successfully entered.");
+                            Console.ReadLine();
                             break;
 
                         case 4:
                             // Display all rooms in the hotel
                             hotel.ViewAllRooms();
+                            Console.WriteLine("All rooms in the hotel have been successfully displayed.");
+                            Console.ReadLine();
                             break;
 
                         case 5:
@@ -69,11 +84,15 @@
                             Console.Write("Nights: ");
                             int nights = int.Parse(Console.ReadLine());
                             hotel.ReserveRoom(nationalID, reserveRoom, nights);
+                            Console.WriteLine("Visitor data has been successfully verified.");
+                            Console.ReadLine();
                             break;
 
                         case 6:
                             // Display all reservations
                             hotel.ViewAllReservations();
+                            Console.WriteLine("All reservations have been successfully displayed.");
+                            Console.ReadLine();
                             break;
 
                         case 7:
@@ -81,11 +100,15 @@
                             Console.Write("Guest Name to Search: ");
                             string searchName = Console.ReadLine();
                             hotel.SearchReservationByGuest(searchName);
+                            Console.WriteLine("A reservation was successfully found for the guest's name.");
+                            Console.ReadLine();
                             break;
 
                         case 8:
                             // Show the guest who paid the most (highest total payment)
                             hotel.ShowHighestPayingGuest();
+                            Console.WriteLine("The guest who paid the highest amount has been successfully found.");
+                            Console.ReadLine();
                             break;
 
                         case 9:
@@ -93,11 +116,14 @@
                             Console.Write("Room Number to Cancel: ");
                             int cancelRoom = int.Parse(Console.ReadLine());
                             hotel.CancelReservation(cancelRoom);
+                            Console.WriteLine("The room number was successfully found to cancel the reservation.");
+                            Console.ReadLine();
                             break;
 
-                        case 10:
+                        case 0:
                             // Exit the program
-                            return;
+                            GoList =false;
+                            break;
 
                         default:
                             // Handle invalid menu choices
