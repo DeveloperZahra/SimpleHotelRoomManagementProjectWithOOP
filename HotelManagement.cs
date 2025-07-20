@@ -50,7 +50,7 @@ namespace SimpleHotelRoomManagementProjectWithOOP
         {
             if (rooms.Any(r => r.RoomNumber == roomNumber))
                 throw new Exception("Room number must be unique.");
-            //Console.ReadLine();
+            //update Console.ReadLine();
             rooms.Add(new Room(roomNumber, dailyRate));
             Console.WriteLine("Room data has been successfully entered.");
             Console.ReadLine();
@@ -73,7 +73,7 @@ namespace SimpleHotelRoomManagementProjectWithOOP
         }
 
         // Reserve a room for an existing guest
-        public void ReserveRoom(string nationalID, int roomNumber, int nights)
+        public void ReserveRoom(string nationalID, int roomNumber, DateTime checkInDateTime, int nights)
         {
             var guest = FindGuestByNationalID(nationalID);
             if (guest == null)
@@ -82,10 +82,15 @@ namespace SimpleHotelRoomManagementProjectWithOOP
             var room = rooms.FirstOrDefault(r => r.RoomNumber == roomNumber);
             if (room == null)
                 throw new Exception("Room does not exist.");
-            if (room.IsReserved)
-                throw new Exception("Room is already reserved.");
 
-            room.ReservationInfo = new Reservation(guest, nights);
+            if (room.IsReserved)
+            {
+                // If the requested check-in date is before the current check-out, deny reservation
+                if (checkInDateTime < room.ReservationInfo.CheckOutDateTime)
+                    throw new Exception($"Room is already reserved until {room.ReservationInfo.CheckOutDateTime}.");
+            }
+
+            room.ReservationInfo = new Reservation(guest, checkInDateTime, nights);
             room.IsReserved = true;
         }
 
