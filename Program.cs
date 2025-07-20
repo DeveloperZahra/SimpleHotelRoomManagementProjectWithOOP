@@ -63,14 +63,12 @@
                             Console.Write("Daily Rate: ");
                             double rate = double.Parse(Console.ReadLine());
                             hotel.AddRoom(roomNum, rate);
-                            Console.WriteLine("Room data has been successfully entered.");
-                            Console.ReadLine();
+                          
                             break;
 
                         case 4:
                             // Display all rooms in the hotel
                             hotel.ViewAllRooms();
-                            Console.WriteLine("All rooms in the hotel have been successfully displayed.");
                             Console.ReadLine();
                             break;
 
