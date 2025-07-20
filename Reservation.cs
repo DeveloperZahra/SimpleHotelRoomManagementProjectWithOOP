@@ -11,25 +11,27 @@ namespace SimpleHotelRoomManagementProjectWithOOP
     {
         public Guest GuestInfo { get; set; }      // The guest who made the reservation
         public int Nights { get; set; }           // Number of nights reserved
-        public DateTime BookingDate { get; set; } // Date when reservation was made
-
+        public DateTime CheckInDateTime { get; set; }     // Exact check-in date and time
+        public DateTime CheckOutDateTime { get; set; }    // Exact check-out date and time
 
         // Constructor ensures nights > 0 and marks the room as reserved
 
-        public  Reservation(Guest guest, int nights)
+        public Reservation(Guest guest, DateTime checkInDateTime, int nights)
         {
             if (nights <= 0) // Validate that the number of nights is positive (cannot reserve 0 or negative nights)
                 throw new ArgumentException("Number of nights must be positive.");
 
             GuestInfo = guest; // Store the guest information (the guest who made the reservation)
             Nights = nights; // Store the number of nights for this reservation
-            BookingDate = DateTime.Now; // Store the date and time when the booking was made (current date and time)
+            CheckInDateTime = checkInDateTime;
+            CheckOutDateTime = CheckInDateTime.AddDays(Nights);  // Automatically calculate checkout based on nights
         }
 
 
         public override string ToString()
         {
-            return $"Guest: {GuestInfo.Name}, Phone: {GuestInfo.PhoneNumber}, Room: (Assigned Later), Nights: {Nights}";
+            return $"Guest: {GuestInfo.Name}, Phone: {GuestInfo.PhoneNumber}, Nights: {Nights}, " +
+               $"Check-In: {CheckInDateTime}, Check-Out: {CheckOutDateTime}";
         }
 
 
