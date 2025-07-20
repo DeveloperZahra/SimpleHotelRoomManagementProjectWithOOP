@@ -50,8 +50,10 @@ namespace SimpleHotelRoomManagementProjectWithOOP
         {
             if (rooms.Any(r => r.RoomNumber == roomNumber))
                 throw new Exception("Room number must be unique.");
-
+            //Console.ReadLine();
             rooms.Add(new Room(roomNumber, dailyRate));
+            Console.WriteLine("Room data has been successfully entered.");
+            Console.ReadLine();
         }
 
         // View all rooms and their stuatus 
