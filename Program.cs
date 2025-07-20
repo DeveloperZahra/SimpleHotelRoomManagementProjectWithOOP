@@ -73,14 +73,16 @@
                             break;
 
                         case 5:
-                            // Ask for the guest's national ID, room number, and number of nights to make a reservation
+                            // // Request reservation details from the user: National ID, Room Number, Check-In Date, and Number of Nights.
                             Console.Write("Guest National ID: ");
                             string nationalID = Console.ReadLine();
                             Console.Write("Room Number: ");
                             int reserveRoom = int.Parse(Console.ReadLine());
+                            Console.Write("Check-In Date (yyyy-MM-dd HH:mm): ");
+                            DateTime checkInDate = DateTime.Parse(Console.ReadLine());
                             Console.Write("Nights: ");
                             int nights = int.Parse(Console.ReadLine());
-                            hotel.ReserveRoom(nationalID, reserveRoom, nights);
+                            hotel.ReserveRoom(nationalID, reserveRoom, checkInDate, nights);
                             Console.WriteLine("Visitor data has been successfully verified.");
                             Console.ReadLine();
                             break;
