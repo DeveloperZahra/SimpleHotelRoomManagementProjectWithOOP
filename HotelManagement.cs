@@ -57,9 +57,17 @@ namespace SimpleHotelRoomManagementProjectWithOOP
         // View all rooms and their stuatus 
 
         public void ViewAllRooms()
-        {
-            foreach (var room in rooms)
-                Console.WriteLine(room);
+            {
+            if (rooms.Count > 0)
+            {
+                foreach (var room in rooms)
+                    Console.WriteLine(room);
+            }
+            else
+            { 
+            Console.WriteLine("You have not added any room.");
+            
+            }
         }
 
         // Reserve a room for an existing guest

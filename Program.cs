@@ -53,7 +53,6 @@
                         case 2:
                             // Display all guests in the hotel
                             hotel.ViewAllGuests();
-                            Console.WriteLine("All guests at the hotel have been successfully viewed.");
                             Console.ReadLine();
                             break;
 
