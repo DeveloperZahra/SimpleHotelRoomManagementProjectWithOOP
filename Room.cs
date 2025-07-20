@@ -23,8 +23,10 @@ namespace SimpleHotelRoomManagementProjectWithOOP
         {
             if (roomNumber <= 0)
                 throw new ArgumentException("Room number must be positive.");
+            //Console.ReadLine();
             if (dailyRate < 100)
                 throw new ArgumentException("Daily rate must be at least 100.");
+           // Console.ReadLine();
 
             RoomNumber = roomNumber;
             DailyRate = dailyRate;
