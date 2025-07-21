@@ -26,7 +26,7 @@
                 Console.WriteLine("7. Search Reservation by Guest Name");
                 Console.WriteLine("8. Show Highest Paying Guest");
                 Console.WriteLine("9. Cancel Reservation");
-                Console.WriteLine("0. Exit");
+                Console.WriteLine("0. Save & Exit");
                 Console.Write("Choose an option: ");
                 Console.WriteLine("\nPress any key to return to the main menu...");
 
@@ -122,6 +122,9 @@
                         case 0:
                             // Exit the program
                             GoList =false;
+                            hotel.SaveAll();
+                            Console.WriteLine("Data saved successfully. Exiting...");
+                            return;
                             break;
 
                         default:
