@@ -21,6 +21,16 @@ namespace SimpleHotelRoomManagementProjectWithOOP
         }
 
 
+        // Save everything to file
+        public void SaveAll()
+        {
+            Guest.SaveGuests(Guests, "Guests.txt");
+            Room.SaveRooms(Rooms, "Rooms.txt");
+            Reservation.SaveReservations(Rooms, "Reservations.txt");
+        }
+
+
+
         // Method to add a new guest to the guests list
         public void AddGuest(Guest guest)
         {
