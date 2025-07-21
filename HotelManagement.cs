@@ -63,7 +63,7 @@ namespace SimpleHotelRoomManagementProjectWithOOP
             return Guests.FirstOrDefault(g => g.NationalID == nationalID);
         }
 
-        // Add new room to the system
+        // Add new room with validation  to the system
         public void AddRoom(int roomNumber, double dailyRate)
         {
             if (Rooms.Any(r => r.RoomNumber == roomNumber))
