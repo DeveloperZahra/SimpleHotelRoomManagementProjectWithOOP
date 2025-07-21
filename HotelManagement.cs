@@ -9,16 +9,24 @@ namespace SimpleHotelRoomManagementProjectWithOOP
     // Manages guests, rooms, and reservations
     class HotelManagement
     {
-        private List<Guest> guests = new List<Guest>();  // All guests
-        private List<Room> rooms = new List<Room>();     // All rooms
+        public List<Guest> Guests { get; private set; }  // Guests list
+        public List<Room> Rooms { get; private set; }    // Rooms list
+
+        // Load all saved data on startup
+        public HotelManagement()
+        {
+            Guests = Guest.LoadGuests("Guests.txt");
+            Rooms = Room.LoadRooms("Rooms.txt");
+            Reservation.LoadReservations(Rooms, Guests, "Reservations.txt");
+        }
+
 
         // Method to add a new guest to the guests list
-
         public void AddGuest(Guest guest)
         {
-            if (guests.Any(g => g.NationalID == guest.NationalID)) // Check if there is already a guest with the same National ID in the list
+            if (Guests.Any(g => g.NationalID == guest.NationalID)) // Check if there is already a guest with the same National ID in the list
                 throw new Exception("Guest with this National ID already exists."); // If found, throw an exception to prevent duplicate National ID
-            guests.Add(guest);  // If no duplicate is found, add the guest to the list
+            Guests.Add(guest);  // If no duplicate is found, add the guest to the list
         }
 
 
@@ -26,9 +34,9 @@ namespace SimpleHotelRoomManagementProjectWithOOP
         // Display all guests
         public void ViewAllGuests()
         {
-            if (guests.Count > 0)
+            if (Guests.Count > 0)
             {
-                foreach (var guest in guests)
+                foreach (var guest in Guests)
                     Console.WriteLine(guest);
             }
             else
@@ -42,16 +50,16 @@ namespace SimpleHotelRoomManagementProjectWithOOP
         // Find guest by National ID
         public Guest FindGuestByNationalID(string nationalID)
         {
-            return guests.FirstOrDefault(g => g.NationalID == nationalID);
+            return Guests.FirstOrDefault(g => g.NationalID == nationalID);
         }
 
         // Add new room to the system
         public void AddRoom(int roomNumber, double dailyRate)
         {
-            if (rooms.Any(r => r.RoomNumber == roomNumber))
+            if (Rooms.Any(r => r.RoomNumber == roomNumber))
                 throw new Exception("Room number must be unique.");
             //update Console.ReadLine();
-            rooms.Add(new Room(roomNumber, dailyRate));
+            Rooms.Add(new Room(roomNumber, dailyRate));
             Console.WriteLine("Room data has been successfully entered.");
             Console.ReadLine();
         }
@@ -60,9 +68,9 @@ namespace SimpleHotelRoomManagementProjectWithOOP
 
         public void ViewAllRooms()
             {
-            if (rooms.Count > 0)
+            if (Rooms.Count > 0)
             {
-                foreach (var room in rooms)
+                foreach (var room in Rooms)
                     Console.WriteLine(room);
             }
             else
@@ -79,7 +87,7 @@ namespace SimpleHotelRoomManagementProjectWithOOP
             if (guest == null)
                 throw new Exception("Guest not found. Please add the guest first.");
 
-            var room = rooms.FirstOrDefault(r => r.RoomNumber == roomNumber);
+            var room = Rooms.FirstOrDefault(r => r.RoomNumber == roomNumber);
             if (room == null)
                 throw new Exception("Room does not exist.");
 
@@ -97,7 +105,7 @@ namespace SimpleHotelRoomManagementProjectWithOOP
         // View all current reservation 
         public void ViewAllReservations()
         {
-            foreach (var room in rooms.Where(r => r.IsReserved))
+            foreach (var room in Rooms.Where(r => r.IsReserved))
             {
                 double total = room.ReservationInfo.Nights * room.DailyRate;
                 Console.WriteLine($"Guest: {room.ReservationInfo.GuestInfo.Name}, Phone: {room.ReservationInfo.GuestInfo.PhoneNumber}, " +
@@ -113,7 +121,7 @@ namespace SimpleHotelRoomManagementProjectWithOOP
 
         public void SearchReservationByGuest(string guestName)
         {
-            var result = rooms.FirstOrDefault(r => r.IsReserved && r.ReservationInfo.GuestInfo.Name.Equals(guestName, StringComparison.OrdinalIgnoreCase));
+            var result = Rooms.FirstOrDefault(r => r.IsReserved && r.ReservationInfo.GuestInfo.Name.Equals(guestName, StringComparison.OrdinalIgnoreCase));
             if (result != null)
                 Console.WriteLine(result);
             else
@@ -124,7 +132,7 @@ namespace SimpleHotelRoomManagementProjectWithOOP
 
         public void ShowHighestPayingGuest()
         {
-            var reservedRooms = rooms.Where(r => r.IsReserved);
+            var reservedRooms = Rooms.Where(r => r.IsReserved);
             if (!reservedRooms.Any())
             {
                 Console.WriteLine("No reservations found.");
@@ -140,7 +148,7 @@ namespace SimpleHotelRoomManagementProjectWithOOP
         // Cancel reservation by room number
         public void CancelReservation(int roomNumber)
         {
-            var room = rooms.FirstOrDefault(r => r.RoomNumber == roomNumber);
+            var room = Rooms.FirstOrDefault(r => r.RoomNumber == roomNumber);
             if (room == null || !room.IsReserved)
             {
                 Console.WriteLine("No reservation found for this room.");
