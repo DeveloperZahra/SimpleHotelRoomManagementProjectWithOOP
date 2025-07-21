@@ -39,9 +39,22 @@ namespace SimpleHotelRoomManagementProjectWithOOP
             return guests;
         }
 
+        //------------------
 
+        // Save rooms to a file
 
+        public static void SaveRooms(List<Room> rooms, string filePath)
+        {
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                foreach (var room in rooms)
+                {
+                    string reserved = room.IsReserved ? "1" : "0";
+                    writer.WriteLine($"{room.RoomNumber}|{room.DailyRate}|{reserved}");
+                }
 
+            }
+        }
 
 
 
