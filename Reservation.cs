@@ -35,8 +35,38 @@ namespace SimpleHotelRoomManagementProjectWithOOP
         }
 
 
+        // Load reservations from file and reconnect to guests and rooms
+        public static void LoadReservations(List<Room> rooms, List<Guest> guests, string filePath)
+        {
+            if (!File.Exists(filePath)) return;
+
+            var lines = File.ReadAllLines(filePath);
+            foreach (var line in lines)
+            {
+                var parts = line.Split('|');
+                int roomNumber = int.Parse(parts[0]);
+                string nationalID = parts[1];
+                int nights = int.Parse(parts[2]);
+                DateTime checkIn = DateTime.Parse(parts[3]);
+                DateTime checkOut = DateTime.Parse(parts[4]);
+
+                var room = rooms.FirstOrDefault(r => r.RoomNumber == roomNumber);
+                var guest = guests.FirstOrDefault(g => g.NationalID == nationalID);
+
+                if (room != null && guest != null)
+                {
+                    room.ReservationInfo = new Reservation(guest, checkIn, nights)
+                    {
+                        CheckOutDateTime = checkOut
+                    };
+                    room.IsReserved = true;
+                }
+            }
 
 
 
-    }
+
+
+
+        }
 }
