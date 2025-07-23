@@ -62,11 +62,26 @@ namespace SimpleHotelRoomManagementProjectWithOOP
                     room.IsReserved = true;
                 }
             }
-
-
-
-
-
-
         }
+
+            // Save all reservations into file 
+
+        public static void SaveReservations(List<Room> rooms, string filePath)
+        {
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                foreach (var room in rooms.Where(r => r.IsReserved))
+                {
+                    var res = room.ReservationInfo;
+                    writer.WriteLine($"{room.RoomNumber}|{res.GuestInfo.NationalID}|{res.Nights}|" +
+                                     $"{res.CheckInDateTime:yyyy-MM-dd HH:mm}|{res.CheckOutDateTime:yyyy-MM-dd HH:mm}");
+                }
+
+
+            }
+        }
+
+
+
+    }
 }
