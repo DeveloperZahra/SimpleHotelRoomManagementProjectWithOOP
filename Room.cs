@@ -45,6 +45,37 @@ namespace SimpleHotelRoomManagementProjectWithOOP
             return $"Room {RoomNumber} - Reserved by {ReservationInfo.GuestInfo.Name} - Nights: {ReservationInfo.Nights} - Total: {totalCost}";
         }
 
+        // Load rooms from a file 
+
+        public static List<Room> LoadRooms(string filePath)
+        {
+            List<Room> rooms = new List<Room>();
+            if (!File.Exists(filePath)) return rooms;
+
+            var lines = File.ReadAllLines(filePath);
+            foreach (var line in lines)
+            {
+                var parts = line.Split('|');
+                var room = new Room(int.Parse(parts[0]), double.Parse(parts[1]))
+                {
+                    IsReserved = parts[2] == "1"
+                };
+                rooms.Add(room);
+            }
+            return rooms;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }
 
