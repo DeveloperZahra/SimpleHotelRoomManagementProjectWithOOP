@@ -1,0 +1,67 @@
+
+class human
+{
+
+ public string name;
+ protected double balance;
+ private int password;
+
+  public void setName(string y)
+  {
+     name = y;
+  }
+
+  
+  public double GetBalance()
+  {
+     return balance;
+  }
+
+
+  public void setPassword(int z)
+  {
+     password = z;
+  }
+
+}
+
+
+class employee : human 
+{
+
+   public setBalance(double input)
+   {
+    
+    balance = input;
+   }
+
+  
+  base.setPassword(1234);
+
+}
+
+
+
+class program 
+{
+
+  public static void main()
+  { 
+
+  human x = new human();
+  x.name =" karim";
+  x.balance ========> error
+  x.password =======> error
+
+ employee k = new employee();
+  k.name;
+  k.
+
+  }
+
+
+
+
+}
+
+
